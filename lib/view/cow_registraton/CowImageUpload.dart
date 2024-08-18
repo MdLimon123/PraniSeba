@@ -26,7 +26,7 @@ class CowImageUpload extends StatefulWidget {
 }
 
 class _HomePageState extends State<CowImageUpload> {
-  late File _image, _imageFront2, _imageLeft, _imageLeft2, _imageRight, _imageRight2, _imageBack, _imageBack2;
+   File? _image, _imageFront2, _imageLeft, _imageLeft2, _imageRight, _imageRight2, _imageBack, _imageBack2;
   final picker = ImagePicker();
 
   Future _getImage(BuildContext context, ImageSource source) async{
@@ -198,7 +198,7 @@ class _HomePageState extends State<CowImageUpload> {
                         child: Container(
                           child: _image != null
                               ?  Image.file(
-                            _image, fit: BoxFit.fill, )
+                            _image!, fit: BoxFit.fill, )
                               : Container(
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(8.0),
@@ -256,7 +256,7 @@ class _HomePageState extends State<CowImageUpload> {
                         child: Container(
                           child: _imageFront2 != null
                               ?  Image.file(
-                            _imageFront2, fit: BoxFit.fill, )
+                            _imageFront2!, fit: BoxFit.fill, )
                               : Container(
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(8.0),
@@ -314,7 +314,7 @@ class _HomePageState extends State<CowImageUpload> {
                         child: Container(
                           child: _imageLeft != null
                               ?  Image.file(
-                            _imageLeft, fit: BoxFit.fill, )
+                            _imageLeft!, fit: BoxFit.fill, )
                               : Container(
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(8.0),
@@ -372,7 +372,7 @@ class _HomePageState extends State<CowImageUpload> {
                         child: Container(
                           child: _imageLeft2 != null
                               ?  Image.file(
-                            _imageLeft2, fit: BoxFit.fill, )
+                            _imageLeft2!, fit: BoxFit.fill, )
                               : Container(
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(8.0),
@@ -430,7 +430,7 @@ class _HomePageState extends State<CowImageUpload> {
                         child: Container(
                           child: _imageRight != null
                               ?  Image.file(
-                            _imageRight, fit: BoxFit.fill, )
+                            _imageRight!, fit: BoxFit.fill, )
                               : Container(
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(8.0),
@@ -488,7 +488,7 @@ class _HomePageState extends State<CowImageUpload> {
                         child: Container(
                           child: _imageRight2 != null
                               ?  Image.file(
-                            _imageRight2, fit: BoxFit.fill, )
+                            _imageRight2!, fit: BoxFit.fill, )
                               : Container(
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(8.0),
@@ -546,7 +546,7 @@ class _HomePageState extends State<CowImageUpload> {
                         child: Container(
                           child: _imageBack != null
                               ?  Image.file(
-                            _imageBack, fit: BoxFit.fill, )
+                            _imageBack!, fit: BoxFit.fill, )
                               : Container(
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(8.0),
@@ -604,7 +604,7 @@ class _HomePageState extends State<CowImageUpload> {
                         child: Container(
                           child: _imageBack2 != null
                               ?  Image.file(
-                            _imageBack2, fit: BoxFit.fill, )
+                            _imageBack2!, fit: BoxFit.fill, )
                               : Container(
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(8.0),
@@ -738,23 +738,23 @@ class _HomePageState extends State<CowImageUpload> {
         break;
     }*/
 
-    var stream = http.ByteStream(DelegatingStream(_image.openRead()));
-    var front_image_2stream = http.ByteStream(DelegatingStream(_imageFront2.openRead()));
-    var lefStream = http.ByteStream(DelegatingStream(_imageLeft.openRead()));
-    var lef2Stream = http.ByteStream(DelegatingStream(_imageLeft2.openRead()));
-    var rightStream = http.ByteStream(DelegatingStream(_imageRight.openRead()));
-    var right2Stream = http.ByteStream(DelegatingStream(_imageRight2.openRead()));
-    var backStream = http.ByteStream(DelegatingStream(_imageBack.openRead()));
-    var back2Stream = http.ByteStream(DelegatingStream(_imageBack2.openRead()));
+    var stream = http.ByteStream(DelegatingStream(_image!.openRead()));
+    var front_image_2stream = http.ByteStream(DelegatingStream(_imageFront2!.openRead()));
+    var lefStream = http.ByteStream(DelegatingStream(_imageLeft!.openRead()));
+    var lef2Stream = http.ByteStream(DelegatingStream(_imageLeft2!.openRead()));
+    var rightStream = http.ByteStream(DelegatingStream(_imageRight!.openRead()));
+    var right2Stream = http.ByteStream(DelegatingStream(_imageRight2!.openRead()));
+    var backStream = http.ByteStream(DelegatingStream(_imageBack!.openRead()));
+    var back2Stream = http.ByteStream(DelegatingStream(_imageBack2!.openRead()));
     // get file length
-    var length = await _image.length(); //imageFile is your image file
-    var front_image_2length = await _imageFront2.length(); //imageFile is your image file
-    var leftLength = await _imageLeft.length(); //imageFile is your image file
-    var left2Length = await _imageLeft2.length(); //imageFile is your image file
-    var rightLength = await _imageRight.length(); //imageFile is your image file
-    var right2Length = await _imageRight2.length(); //imageFile is your image file
-    var backLength = await _imageBack.length(); //imageFile is your image file
-    var back2Length = await _imageBack2.length(); //imageFile is your image file
+    var length = await _image!.length(); //imageFile is your image file
+    var front_image_2length = await _imageFront2!.length(); //imageFile is your image file
+    var leftLength = await _imageLeft!.length(); //imageFile is your image file
+    var left2Length = await _imageLeft2!.length(); //imageFile is your image file
+    var rightLength = await _imageRight!.length(); //imageFile is your image file
+  var right2Length = await _imageRight2!.length(); //imageFile is your image file
+    var backLength = await _imageBack!.length(); //imageFile is your image file
+    var back2Length = await _imageBack2!.length(); //imageFile is your image file
     Map<String, String> headers = headersToken; // ignore this headers if there is no authentication
 
     // string to uri
@@ -763,14 +763,14 @@ class _HomePageState extends State<CowImageUpload> {
     var request = new http.MultipartRequest("POST", uri);
 
     // multipart that takes file
-    var multipartFileSign = new http.MultipartFile('front_image_1', stream, length, filename: basename(_image.path));
-    var front_image_2file = new http.MultipartFile('front_image_2', front_image_2stream, front_image_2length, filename: basename(_imageFront2.path));
-    var lefFile = new http.MultipartFile('left_image_1', lefStream, leftLength, filename: basename(_imageLeft.path));
-    var left2File = new http.MultipartFile('left_image_2', lef2Stream, left2Length, filename: basename(_imageLeft2.path));
-    var rightFile = new http.MultipartFile('right_image_1', rightStream, rightLength, filename: basename(_imageRight.path));
-    var right2File = new http.MultipartFile('right_image_2', right2Stream, right2Length , filename: basename(_imageRight2.path));
-    var backFile = new http.MultipartFile('back_image_1', backStream, backLength, filename: basename(_imageBack.path));
-    var back2File = new http.MultipartFile('back_image_2', back2Stream, back2Length, filename: basename(_imageBack2.path));
+    var multipartFileSign = new http.MultipartFile('front_image_1', stream, length, filename: basename(_image!.path));
+    var front_image_2file = new http.MultipartFile('front_image_2', front_image_2stream, front_image_2length, filename: basename(_imageFront2!.path));
+    var lefFile = new http.MultipartFile('left_image_1', lefStream, leftLength, filename: basename(_imageLeft!.path));
+    var left2File = new http.MultipartFile('left_image_2', lef2Stream, left2Length, filename: basename(_imageLeft2!.path));
+    var rightFile = new http.MultipartFile('right_image_1', rightStream, rightLength, filename: basename(_imageRight!.path));
+    var right2File = new http.MultipartFile('right_image_2', right2Stream, right2Length , filename: basename(_imageRight2!.path));
+    var backFile = new http.MultipartFile('back_image_1', backStream, backLength, filename: basename(_imageBack!.path));
+    var back2File = new http.MultipartFile('back_image_2', back2Stream, back2Length, filename: basename(_imageBack2!.path));
     // add file to multipart
     request.files.add(multipartFileSign);
     request.files.add(front_image_2file);

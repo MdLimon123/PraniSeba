@@ -28,7 +28,7 @@ class CalfData extends StatefulWidget {
 }
 
 class _HomePageState extends State<CalfData> {
-  late File _image;
+   File? _image;
   final picker = ImagePicker();
   TextEditingController calfNameCon = TextEditingController();
   List<String> _calfGender = ['এঁড়ে বাছুর', 'বকনা'];
@@ -53,7 +53,7 @@ class _HomePageState extends State<CalfData> {
   ];
   List<String> _yesNoList = ['হ্যা', 'না'];
 
-  late String selectedFarms,
+   String? selectedFarms,
       selectedCattleId,
       selectedCalfGender,
       selectedCalfWeight,
@@ -473,7 +473,7 @@ class _HomePageState extends State<CalfData> {
                                 alignment: Alignment.center,
                                 child: Icon(Icons.add))
                             : Image.file(
-                                _image,
+                                _image!,
                                 fit: BoxFit.cover,
                               ),
                       ),
@@ -559,9 +559,9 @@ class _HomePageState extends State<CalfData> {
   }
 
   void dataPush(BuildContext context) async {
-    var stream = new http.ByteStream(DelegatingStream(_image.openRead()));
+    var stream = new http.ByteStream(DelegatingStream(_image!.openRead()));
     // get file length
-    var length = await _image.length(); //imageFile is your image file
+    var length = await _image!.length(); //imageFile is your image file
     Map<String, String> headers = headersToken; // ignore this headers if there is no authentication
 
     // string to uri
@@ -572,7 +572,7 @@ class _HomePageState extends State<CalfData> {
 
     // multipart that takes file
     var multipartFileSign = new http.MultipartFile('image', stream, length,
-        filename: basename(_image.path));
+        filename: basename(_image!.path));
 
     // add file to multipart
     request.files.add(multipartFileSign);
@@ -581,13 +581,13 @@ class _HomePageState extends State<CalfData> {
     request.headers.addAll(headers);
 
     //adding params
-    request.fields["farm_id"] = selectedFarms;
-    request.fields["cattle_id"] = selectedCattleId;
-    request.fields["tag"] = selectedTag;
+    request.fields["farm_id"] = selectedFarms!;
+    request.fields["cattle_id"] = selectedCattleId!;
+    request.fields["tag"] = selectedTag!;
     request.fields["name"] = calfNameCon.text;
     request.fields["birth_date"] = _date2.text;
-    request.fields["gender"] = selectedCalfGender;
-    request.fields["weight"] = selectedCalfWeight;
+    request.fields["gender"] = selectedCalfGender!;
+    request.fields["weight"] = selectedCalfWeight!;
     request.fields["calf_birth_problem_ids"] =
         calfBirthProblemChecked.toList().toString();
 
