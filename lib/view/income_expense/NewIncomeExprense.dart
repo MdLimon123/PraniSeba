@@ -156,10 +156,12 @@ class _HomePageState extends State<NewIncomeExprense> {
                           if (selectedAccountType == 'আয়') {
                             accountStatus = true;
                             accountVisibility = true;
+                            selectedIncomeAccountName=null;
                           }
                           if (selectedAccountType == 'ব্যয়') {
                             accountStatus = false;
                             accountVisibility = true;
+                            selectedIncomeAccountName=null;
                           }
                         },
                         items: _accountType.map((location) {
@@ -244,6 +246,8 @@ class _HomePageState extends State<NewIncomeExprense> {
                 ),
               ),
             ),
+          
+          
             Visibility(
               visible: accountVisibility,
               child: Container(
@@ -271,7 +275,7 @@ class _HomePageState extends State<NewIncomeExprense> {
                   int unit = int.parse(unitIncome!);
                   assert(unit is int);
 
-                  total = (quan + unit);
+                  total = (quan * unit);
                   totalCon.text = total.toString();
                   print(total);
                 },
@@ -298,7 +302,7 @@ class _HomePageState extends State<NewIncomeExprense> {
                   int unit = int.parse(unitIncome!);
                   assert(unit is int);
 
-                  total = (quan + unit);
+                  total = (quan * unit);
                   totalCon.text = total.toString();
                   print(total);
                 },
@@ -430,7 +434,7 @@ class _HomePageState extends State<NewIncomeExprense> {
     print(response.statusCode);
     print(response.body);
     final responseJson = json.decode(response.body);
-    String data = responseJson['error'];
+   
     switch (response.statusCode) {
       case 200:
         dataInsertSuccess(context);
@@ -442,6 +446,7 @@ class _HomePageState extends State<NewIncomeExprense> {
         break;
 
       default:
+       String data = responseJson['error'];
         Navigator.pop(context, true);
         Common.setWrongToast(data.toString());
         break;
